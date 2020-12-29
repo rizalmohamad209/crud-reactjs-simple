@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {connect} from 'react-redux'
 import {
   Collapse,
   Navbar,
@@ -9,6 +10,12 @@ import {
   NavLink,
   Container,
 } from "reactstrap";
+const mapStateToProps = (state) => {
+  return {
+    title: state.users.title
+    
+  }
+}
 
 const NavbarComponent = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +26,7 @@ const NavbarComponent = (props) => {
     <div>
       <Navbar color="light" light expand="md">
         <Container>
-          <NavbarBrand href="/">{props.judul}</NavbarBrand>
+          <NavbarBrand href="/">{props.title}</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
@@ -42,4 +49,4 @@ const NavbarComponent = (props) => {
   );
 };
 
-export default NavbarComponent;
+export default connect(mapStateToProps, null)(NavbarComponent);
